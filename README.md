@@ -41,15 +41,97 @@
 
 ```bash
 python extract_articles_and_urls.py
+```
 
-或者在cursor/vscode/trae/windsurf中执行文件更好用。
+或者在cursor/vscode/trae/windsurf等IDE中直接执行文件更加方便。
 
-飞书文档（小x宝社区内部）
-https://uei55ql5ok.feishu.cn/wiki/J62Nwbl7hiOApikDmvEcB3EUnQc
+## 相关资源
+
+- **飞书文档**（小x宝社区内部）：
+  ```
+  https://uei55ql5ok.feishu.cn/wiki/J62Nwbl7hiOApikDmvEcB3EUnQc
+  ```
+
+- **批量微信公众号下载教学视频**：
+  ```
+  https://www.vidline.com/share/V0G2HA3AM4/26d6360c6211320cb482f8ca3699ca75
+  ```
+
+- **在线工具**：
+  ```
+  https://changfengbox.top/wechat
+  ```
 
 
-批量微信公众号下载教学视频
-https://www.vidline.com/share/V0G2HA3AM4/26d6360c6211320cb482f8ca3699ca75
+---
+## 批量转换为Markdown
+提取URL后，您可以使用 webreader_to_markdown.py 脚本将文章批量转换为Markdown格式。
 
-工具：
-https://changfengbox.top/wechat
+### webreader_to_markdown.py 使用说明
+这个脚本通过API将微信公众号文章批量转换为Markdown格式。
+ 工作原理
+1. 利用专业API进行网页内容访问和转换
+2. 支持批量处理，大幅提高转换效率
+3. 自动处理文章格式，保留原文排版和图片 使用前准备
+1. API密钥申请：
+   
+   - 可以联系Vlinic大佬申请API密钥（可能需要付费）
+   - API密钥用于访问转换服务，提高转换质量和速度
+2. 环境配置：
+   
+   - 创建 .env 文件，将API密钥添加到文件中
+   ```bash
+   touch .env && vim .env
+   ```
+   - .env 文件格式示例：
+  ``` 
+  WEB_READER_API_KEY=your_api_key_here
+   ```
+   - 确保 .env 文件与脚本在同一目录下 使用方法
+
+
+修改输入文件路径
+在使用 batch_webreader_to_markdown.py 前，您需要修改脚本中的输入文件路径：
+
+1. 打开 batch_webreader_to_markdown.py 文件
+2. 找到以下代码行（大约在第248行）：
+   
+   ```python
+   url_file = '/Users/qinxiaoqiang/Downloads/公众号下载jina2md/dingxiangyuan_element.md'
+    ```
+   ```
+3. 将路径修改为您自己的HTML元素文件路径，例如：
+   
+   ```python
+   url_file = '/您的用户目录/您的文件路径/您的文件名.md'
+    ```
+   ```
+   
+   或者使用相对路径：
+   
+   ```python
+   url_file = os.path.join(current_dir, '您的文件名.md')
+    ```
+   ```
+4. 同样，您也可以修改输出目录（如果需要）：
+   
+   ```python
+   output_dir = os.path.join(current_dir, 'converted_files', '您的公众号名称', current_date)
+    ```
+   ```
+
+
+```bash
+python webreader_to_markdown.py -i extracted_urls.txt -o output_directory
+ ```
+
+
+
+
+参数说明：
+
+- -i, --input : 输入的URL列表文件（使用extract_articles_and_urls.py生成的txt文件）
+- -o, --output : 输出目录，用于保存转换后的Markdown文件 优势
+- 比手动转换效率高数十倍
+- 保留原文格式，包括图片、表格等
+- 支持批量处理，适合大量文章的转换需求
